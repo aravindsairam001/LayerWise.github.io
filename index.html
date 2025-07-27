@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LayerWise - 3D Printing Services</title>
+    <style>
+        /* --- Basic Setup --- */
+        :root {
+            --primary-color: #007bff;
+            --dark-color: #0a2540;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --white-color: #ffffff;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: var(--white-color);
+            color: var(--text-color);
+            scroll-behavior: smooth;
+        }
+        
+        /* --- General Styling --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1, h2 {
+            color: var(--dark-color);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+        }
+        section {
+            padding: 60px 0;
+        }
+        .section-light {
+            background-color: var(--light-color);
+        }
+
+        /* --- Header & Navigation --- */
+        .navbar {
+            background: var(--white-color);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+        .navbar nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .navbar nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(10, 37, 64, 0.7), rgba(10, 37, 64, 0.7)), url('https://placehold.co/1200x600/0a2540/ffffff?text=3D+Printer+in+Action') no-repeat center center/cover;
+            color: var(--white-color);
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--white-color);
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--white-color);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+
+        /* --- Services Section --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        .service-card {
+            background: var(--white-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .service-card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-top: 0;
+        }
+
+        /* --- Products Section --- */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .product-card {
+            background: var(--white-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+            text-align: center;
+        }
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .product-card-content {
+            padding: 20px;
+        }
+        .product-card-content h3 {
+            margin-top: 0;
+        }
+        .product-card-content .btn {
+            margin-top: 10px;
+        }
+
+        /* --- Quote Section --- */
+        .quote-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white-color);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+            border: 1px dashed var(--primary-color);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .file-upload-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        #file-name {
+            margin-top: 10px;
+            font-style: italic;
+            color: #555;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background: var(--primary-color);
+            color: var(--white-color);
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-submit:hover {
+            background: #0056b3;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .navbar .container {
+                flex-direction: column;
+            }
+            .navbar nav {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="#" class="logo">🚀 LayerWise</a>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#products">Products</a>
+                <a href="#quote">Get a Quote</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Bringing Your Ideas to Life, Layer by Layer</h1>
+                <p>High-quality FDM and Resin 3D printing services for prototypes, products, and passions.</p>
+                <a href="#quote" class="btn">Get a Free Quote</a>
+            </div>
+        </section>
+
+        <section id="services" class="section-light">
+            <div class="container">
+                <h2>Our 3D Printing Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>FDM (Fused Deposition Modeling)</h3>
+                        <p>Ideal for rapid prototyping, functional parts, and large-scale models. We use durable materials like PLA, PETG, and ABS to create strong and cost-effective prints.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Resin (SLA/DLP) Printing</h3>
+                        <p>Perfect for projects requiring intricate details and a smooth surface finish. Our resin printers excel at creating stunning miniatures, jewelry, and detailed display models.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <hr/>
+
+        <section id="products">
+            <div class="container">
+                <h2>Shop Our 3D Printed Products</h2>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <img src="https://placehold.co/400x300/007bff/ffffff?text=Phone+Stand" alt="Custom Phone Stand">
+                        <div class="product-card-content">
+                            <h3>Custom Phone Stand</h3>
+                            <p>A sleek and sturdy stand for your device. Customizable with your name!</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/400x300/28a745/ffffff?text=Articulated+Dragon" alt="Articulated Dragon">
+                        <div class="product-card-content">
+                            <h3>Articulated Dragon</h3>
+                            <p>A fun, flexible toy that's printed in place with no assembly required.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://placehold.co/400x300/dc3545/ffffff?text=Miniature+Figurine" alt="Miniature Figurine">
+                        <div class="product-card-content">
+                            <h3>Tabletop Miniature</h3>
+                            <p>High-detail resin figures for your D&D campaigns or display shelf.</p>
+                            <a href="#" class="btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr/>
+
+        <section id="quote" class="section-light">
+            <div class="container">
+                <h2>Get a Custom Quote</h2>
+                <form 
+                    action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT" 
+                    method="POST" 
+                    enctype="multipart/form-data"
+                    class="quote-form">
+                    
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Your Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="file-upload">Upload Your 3D File (.stl, .obj, .3mf)</label>
+                        <div class="file-upload-wrapper">
+                            <span>Click to choose a file</span>
+                            <input type="file" id="file-upload" name="upload" accept=".stl,.obj,.3mf" required>
+                        </div>
+                        <div id="file-name">No file selected</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Notes or Special Requirements</label>
+                        <textarea id="message" name="message" rows="4"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Get My Quote</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 LayerWise. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript to display the name of the uploaded file
+        const fileInput = document.getElementById('file-upload');
+        const fileNameDisplay = document.getElementById('file-name');
+        
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = `Selected file: ${fileInput.files[0].name}`;
+            } else {
+                fileNameDisplay.textContent = 'No file selected';
+            }
+        });
+    </script>
+</body>
+</html>
