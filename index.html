@@ -431,7 +431,7 @@
             </div>
 
             <div class="max-w-2xl mx-auto glass-dark rounded-3xl p-8 slide-up delay-300">
-                <form id="quote-form" action="https://formspree.io/f/mwpqbvow" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <form id="quote-form" action="https://formspree.io/f/mwpqbvow" method="POST" class="space-y-6">
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
@@ -448,19 +448,11 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Upload Your 3D File</label>
-                        <div class="relative">
-                            <input type="file" id="file-input" name="upload" accept=".stl,.obj,.3mf" required class="hidden">
-                            <label for="file-input" class="block w-full p-8 border-2 border-dashed border-gray-600 rounded-xl cursor-pointer hover:border-primary-500 transition-colors text-center">
-                                <div class="space-y-2">
-                                    <div class="text-4xl">📁</div>
-                                    <p class="text-gray-400">
-                                        <span class="font-semibold text-primary-500">Click to upload</span> or drag and drop
-                                    </p>
-                                    <p class="text-sm text-gray-500">STL, OBJ, 3MF (max 50MB)</p>
-                                </div>
-                            </label>
-                        </div>
+                        <label for="drive-link" class="block text-sm font-semibold text-gray-300 mb-2">Public Drive Link (.zip)</label>
+                        <input type="url" id="drive-link" name="drive-link" required 
+                               class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
+                               placeholder="https://drive.google.com/...">
+                        <p class="text-xs text-gray-500 mt-2">Please ensure sharing is set to "Anyone with the link can view".</p>
                     </div>
 
                     <div>
@@ -513,20 +505,7 @@
         function scrollToServices() {
             document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
         }
-
-        // --- File input display ---
-        const fileInput = document.getElementById('file-input');
-        const fileDropLabel = document.querySelector('label[for="file-input"]');
         
-        fileInput.addEventListener('change', () => {
-            if (fileInput.files.length > 0) {
-                const fileName = fileInput.files[0].name;
-                fileDropLabel.querySelector('.text-gray-400').innerHTML = `<span class="font-semibold text-primary-500">${fileName}</span>`;
-            } else {
-                 fileDropLabel.querySelector('.text-gray-400').innerHTML = `<span class="font-semibold text-primary-500">Click to upload</span> or drag and drop`;
-            }
-        });
-
         // --- Form submission ---
         const quoteForm = document.getElementById('quote-form');
         quoteForm.addEventListener('submit', (e) => {
