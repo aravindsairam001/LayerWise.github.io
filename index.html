@@ -1112,6 +1112,61 @@
         </div>
     </footer>
 
+    <!-- AI Design Assistant Widget -->
+    <div class="ai-assistant" id="aiAssistant" title="AI Design Assistant">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="white"/>
+            <path d="M19 15L20.18 18.5L24 19L20.18 19.5L19 23L17.82 19.5L14 19L17.82 18.5L19 15Z" fill="white"/>
+        </svg>
+    </div>
+
+    <!-- Real-time Collaboration Indicator -->
+    <div class="collaboration-indicator" id="collaborationIndicator">
+        <span class="inline-block w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+        3 designers online
+    </div>
+
+    <!-- Voice Command Indicator -->
+    <div class="voice-indicator" id="voiceIndicator">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 1C10.34 1 9 2.34 9 4V12C9 13.66 10.34 15 12 15S15 13.66 15 12V4C15 2.34 13.66 1 12 1Z" fill="white"/>
+            <path d="M19 10V12C19 15.87 15.87 19 12 19S5 15.87 5 12V10H7V12C7 14.76 9.24 17 12 17S17 14.76 17 12V10H19Z" fill="white"/>
+            <path d="M10 21H14V23H10V21Z" fill="white"/>
+        </svg>
+    </div>
+
+    <!-- Smart Analytics Dashboard -->
+    <div class="analytics-widget" id="analyticsWidget">
+        <h3 class="text-lg font-bold mb-4 flex items-center">
+            <svg width="20" height="20" class="mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 13H5V20H3V13Z" fill="#00A99D"/>
+                <path d="M7 9H9V20H7V9Z" fill="#00A99D"/>
+                <path d="M11 5H13V20H11V5Z" fill="#00A99D"/>
+                <path d="M15 12H17V20H15V12Z" fill="#00A99D"/>
+                <path d="M19 8H21V20H19V8Z" fill="#00A99D"/>
+            </svg>
+            Live Analytics
+        </h3>
+        <div class="space-y-3">
+            <div class="flex justify-between">
+                <span class="text-gray-300">Active Users:</span>
+                <span class="text-green-400 font-bold" id="activeUsers">1,247</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-300">Print Jobs Today:</span>
+                <span class="text-blue-400 font-bold" id="printJobs">89</span>
+            </div>
+            <div class="flex justify-between">
+                <span class="text-gray-300">CO2 Saved:</span>
+                <span class="text-green-400 font-bold" id="co2Saved">234kg</span>
+            </div>
+            <div class="w-full bg-gray-700 rounded-full h-2 mt-4">
+                <div class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full" style="width: 78%"></div>
+            </div>
+            <p class="text-xs text-gray-400">Weekly sustainability goal: 78%</p>
+        </div>
+    </div>
+
     <!-- Back to Top Button -->
     <button id="back-to-top" aria-label="Back to top">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1124,6 +1179,41 @@
 
     <!-- Scripts -->
     <script>
+        // Notification System
+        function showNotification(message, type = 'info', duration = 4000) {
+            const notification = document.createElement('div');
+            notification.className = `notification-toast ${type}`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Trigger animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Auto-remove
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 400);
+            }, duration);
+        }
+
+        // Loading Screen - Hide immediately when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                setTimeout(() => {
+                    loadingScreen.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                    }, 500);
+                }, 800); // Reduced from 1500ms to 800ms
+            }
+        });
+
         // Smooth scrolling for internal links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1136,6 +1226,21 @@
                 });
             });
         });
+
+        // Scroll functions for navigation
+        function scrollToQuote() {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+                contactSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function scrollToServices() {
+            const servicesSection = document.getElementById('services');
+            if (servicesSection) {
+                servicesSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
 
         // Scroll to top functionality
         const backToTopBtn = document.getElementById('back-to-top');
