@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LayerWise - Future of 3D Printing</title>
+    
+    <!-- SEO and Social Media Meta Tags -->
+    <meta name="description" content="Transform your ideas into reality with LayerWise's precision 3D printing. Professional FDM & Resin printing with cutting-edge technology.">
+    <meta name="keywords" content="3D printing, FDM, Resin printing, prototyping, LayerWise, precision printing">
+    <meta name="author" content="LayerWise">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="LayerWise - Future of 3D Printing">
+    <meta property="og:description" content="Transform your ideas into reality with precision 3D printing technology">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://layerwise.com">
+    <meta property="og:image" content="layerwise_logo.png">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="LayerWise - Future of 3D Printing">
+    <meta name="twitter:description" content="Transform your ideas into reality with precision 3D printing technology">
+    <meta name="twitter:image" content="layerwise_logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="layerwise_logo.png">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Sora:wght@600;700;800&display=swap" as="style">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font: Sora for headings, Inter for body -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -154,30 +179,213 @@
             background: linear-gradient(45deg, #00A99D, #6366f1);
             border-radius: 4px;
         }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0f1c;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        #loading-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 169, 157, 0.2);
+            border-top: 3px solid #00A99D;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00A99D, #6366f1);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 169, 157, 0.4);
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(45deg, #00A99D, #6366f1);
+            z-index: 9998;
+            transition: width 0.3s ease;
+        }
+
+        /* Improved form validation styles */
+        .form-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Improved accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: #00A99D;
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 10000;
+            border-radius: 4px;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .slide-up { animation: none; opacity: 1; transform: none; }
+            .gradient-text { animation: none; }
+            .pulse-glow { animation: none; }
+        }
+
+        /* Dark mode improvements */
+        @media (prefers-color-scheme: light) {
+            body { background: #f8fafc; color: #1a202c; }
+            .glass-dark { background: rgba(255, 255, 255, 0.8); border: 1px solid rgba(0, 0, 0, 0.1); }
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0f1c;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        #loading-screen h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        #loading-screen p {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body class="text-white font-sans">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="layerwise_logo.png" alt="LayerWise Logo" class="h-16 mb-4 animate-pulse">
+        <div class="loader"></div>
+        <p class="text-white mt-4 text-lg">Preparing your experience...</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" aria-label="Back to top">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+        </svg>
+    </button>
+
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <h1>Welcome to LayerWise</h1>
+        <p>Loading the future of 3D printing...</p>
+    </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-dark">
+    <nav class="fixed top-0 w-full z-50 glass-dark" role="navigation" aria-label="Main navigation">
         <div class="container mx-auto px-6 h-20 flex items-center">
             <div class="flex items-center justify-between w-full">
                 <!-- ** LOGO CONTAINER **: Logo and company name together -->
-                <a href="#" class="flex items-center space-x-3">
+                <a href="#" class="flex items-center space-x-3" aria-label="LayerWise Home">
                     <img src="layerwise_logo.png" alt="LayerWise Logo" class="h-14"> <!-- Adjusted height -->
                     <span class="text-2xl font-bold gradient-text font-display">LayerWise</span>
                 </a>
                 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
-                    <a href="#products" class="text-gray-300 hover:text-white transition-colors">Products</a>
-                    <a href="#process" class="text-gray-300 hover:text-white transition-colors">Process</a>
-                    <button onclick="scrollToQuote()" class="btn-primary text-white px-6 py-2 rounded-full font-semibold">
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Services</a>
+                    <a href="#products" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Products</a>
+                    <a href="#process" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Process</a>
+                    <button onclick="scrollToQuote()" class="btn-primary text-white px-6 py-2 rounded-full font-semibold focus:outline-none focus:ring-2 focus:ring-primary-500">
                         Get Started
                     </button>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden text-white">
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary-500 rounded" aria-label="Toggle mobile menu" aria-expanded="false">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -187,20 +395,20 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 glass-dark transform translate-x-full transition-transform duration-300 md:hidden">
+    <div id="mobile-menu" class="fixed inset-0 z-40 glass-dark transform translate-x-full transition-transform duration-300 md:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
         <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-            <a href="#services" class="text-white hover:text-primary-500 transition-colors">Services</a>
-            <a href="#products" class="text-white hover:text-primary-500 transition-colors">Products</a>
-            <a href="#process" class="text-white hover:text-primary-500 transition-colors">Process</a>
-            <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-3 rounded-full font-semibold">
+            <a href="#services" class="text-white hover:text-primary-500 transition-colors focus:text-primary-500 focus:outline-none">Services</a>
+            <a href="#products" class="text-white hover:text-primary-500 transition-colors focus:text-primary-500 focus:outline-none">Products</a>
+            <a href="#process" class="text-white hover:text-primary-500 transition-colors focus:text-primary-500 focus:outline-none">Process</a>
+            <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-3 rounded-full font-semibold focus:outline-none focus:ring-2 focus:ring-primary-500">
                 Get Started
             </button>
         </div>
     </div>
 
     <!-- Hero Section with 3D Model -->
-    <section class="hero-bg min-h-screen flex items-center justify-center relative">
-        <canvas id="hero-canvas"></canvas>
+    <section id="main-content" class="hero-bg min-h-screen flex items-center justify-center relative">
+        <canvas id="hero-canvas" aria-hidden="true"></canvas>
         <div class="container mx-auto px-6 text-center relative z-10">
             <div class="max-w-5xl mx-auto">
                 <h1 class="text-5xl md:text-7xl font-extrabold mb-6 slide-up font-display">
@@ -211,10 +419,10 @@
                     Professional FDM & Resin printing that pushes boundaries.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center slide-up delay-400">
-                    <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg">
+                    <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
                         🚀 Start Your Project
                     </button>
-                    <button onclick="scrollToServices()" class="glass text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all">
+                    <button onclick="scrollToServices()" class="glass text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/50">
                         Explore Services
                     </button>
                 </div>
@@ -431,40 +639,57 @@
             </div>
 
             <div class="max-w-2xl mx-auto glass-dark rounded-3xl p-8 slide-up delay-300">
-                <form id="quote-form" action="https://formspree.io/f/mwpqbvow" method="POST" class="space-y-6">
+                <form id="quote-form" action="https://formspree.io/f/mwpqbvow" method="POST" class="space-y-6" novalidate>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
-                            <input type="text" name="name" required 
+                            <label for="name" class="block text-sm font-semibold text-gray-300 mb-2">Your Name *</label>
+                            <input type="text" id="name" name="name" required 
                                    class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
-                                   placeholder="John Doe">
+                                   placeholder="John Doe"
+                                   aria-describedby="name-error">
+                            <div id="name-error" class="error-message">Please enter your name</div>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
-                            <input type="email" name="email" required 
+                            <label for="email" class="block text-sm font-semibold text-gray-300 mb-2">Email Address *</label>
+                            <input type="email" id="email" name="email" required 
                                    class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
-                                   placeholder="john@example.com">
+                                   placeholder="john@example.com"
+                                   aria-describedby="email-error">
+                            <div id="email-error" class="error-message">Please enter a valid email address</div>
                         </div>
                     </div>
 
                     <div>
-                        <label for="drive-link" class="block text-sm font-semibold text-gray-300 mb-2">Public Drive Link (.zip)</label>
+                        <label for="drive-link" class="block text-sm font-semibold text-gray-300 mb-2">Public Drive Link (.zip) *</label>
                         <input type="url" id="drive-link" name="drive-link" required 
                                class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
-                               placeholder="https://drive.google.com/...">
-                        <p class="text-xs text-gray-500 mt-2">Please ensure sharing is set to "Anyone with the link can view".</p>
+                               placeholder="https://drive.google.com/..."
+                               aria-describedby="drive-link-help drive-link-error">
+                        <p id="drive-link-help" class="text-xs text-gray-500 mt-2">Please ensure sharing is set to "Anyone with the link can view".</p>
+                        <div id="drive-link-error" class="error-message">Please enter a valid drive link</div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Project Requirements</label>
-                        <textarea name="message" rows="4" 
+                        <label for="message" class="block text-sm font-semibold text-gray-300 mb-2">Project Requirements</label>
+                        <textarea id="message" name="message" rows="4" 
                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all resize-none"
-                                  placeholder="Tell us about your project - material preferences, quantity, timeline, special requirements..."></textarea>
+                                  placeholder="Tell us about your project - material preferences, quantity, timeline, special requirements..."
+                                  aria-describedby="message-help"></textarea>
+                        <p id="message-help" class="text-xs text-gray-500 mt-2">Optional: Provide details about your project to help us give you a better quote</p>
                     </div>
 
-                    <button type="submit" class="w-full btn-primary text-white font-bold py-4 px-8 rounded-xl text-lg">
+                    <button type="submit" class="w-full btn-primary text-white font-bold py-4 px-8 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
                         🚀 Get Instant Quote
                     </button>
+                    
+                    <div id="form-status" class="text-center text-sm hidden">
+                        <div id="form-success" class="text-green-400 hidden">
+                            ✅ Your quote request has been submitted successfully! We'll get back to you within 24 hours.
+                        </div>
+                        <div id="form-error" class="text-red-400 hidden">
+                            ❌ There was an error submitting your request. Please try again.
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -483,17 +708,71 @@
     </footer>
 
     <script>
+        // --- Loading Screen ---
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // --- Progress Bar ---
+        window.addEventListener('scroll', () => {
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollTop = window.pageYOffset;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        });
+
+        // --- Back to Top Button ---
+        const backToTopBtn = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
         // --- Mobile menu toggle ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
         mobileMenuBtn.addEventListener('click', () => {
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.classList.toggle('translate-x-full');
+            
+            // Lock body scroll when menu is open
+            if (!isExpanded) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         });
 
         mobileMenu.addEventListener('click', (e) => {
             if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
                 mobileMenu.classList.add('translate-x-full');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Close mobile menu with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('translate-x-full')) {
+                mobileMenu.classList.add('translate-x-full');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
             }
         });
 
@@ -505,16 +784,150 @@
         function scrollToServices() {
             document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
         }
-        
-        // --- Form submission ---
+
+        // --- Enhanced Form Validation and Submission ---
         const quoteForm = document.getElementById('quote-form');
-        quoteForm.addEventListener('submit', (e) => {
+        const formStatus = document.getElementById('form-status');
+        const formSuccess = document.getElementById('form-success');
+        const formError = document.getElementById('form-error');
+
+        // Real-time validation
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const driveInput = document.getElementById('drive-link');
+
+        function validateField(field, validator, errorId) {
+            const errorElement = document.getElementById(errorId);
+            const isValid = validator(field.value);
+            
+            if (!isValid && field.value.length > 0) {
+                field.classList.add('form-error');
+                errorElement.classList.add('show');
+            } else {
+                field.classList.remove('form-error');
+                errorElement.classList.remove('show');
+            }
+            
+            return isValid;
+        }
+
+        // Validation functions
+        const validators = {
+            name: (value) => value.trim().length >= 2,
+            email: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+            driveLink: (value) => {
+                if (!value) return false;
+                try {
+                    new URL(value);
+                    return value.includes('drive.google.com') || 
+                           value.includes('dropbox.com') || 
+                           value.includes('onedrive.com') ||
+                           value.includes('mega.nz');
+                } catch {
+                    return false;
+                }
+            }
+        };
+
+        // Add event listeners for real-time validation
+        nameInput.addEventListener('blur', () => validateField(nameInput, validators.name, 'name-error'));
+        emailInput.addEventListener('blur', () => validateField(emailInput, validators.email, 'email-error'));
+        driveInput.addEventListener('blur', () => validateField(driveInput, validators.driveLink, 'drive-link-error'));
+
+        // Form submission with enhanced feedback
+        quoteForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Validate all fields
+            const isNameValid = validateField(nameInput, validators.name, 'name-error');
+            const isEmailValid = validateField(emailInput, validators.email, 'email-error');
+            const isDriveValid = validateField(driveInput, validators.driveLink, 'drive-link-error');
+            
+            if (!isNameValid || !isEmailValid || !isDriveValid) {
+                // Scroll to first error
+                const firstError = document.querySelector('.form-error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
+                return;
+            }
+
             const button = quoteForm.querySelector('button[type="submit"]');
-            button.disabled = true;
-            button.innerHTML = 'Submitting...';
+            const originalText = button.innerHTML;
+            
+            try {
+                button.disabled = true;
+                button.innerHTML = '⏳ Submitting...';
+                
+                const formData = new FormData(quoteForm);
+                const response = await fetch(quoteForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formStatus.classList.remove('hidden');
+                    formSuccess.classList.remove('hidden');
+                    formError.classList.add('hidden');
+                    quoteForm.reset();
+                    
+                    // Auto-hide success message after 5 seconds
+                    setTimeout(() => {
+                        formStatus.classList.add('hidden');
+                        formSuccess.classList.add('hidden');
+                    }, 5000);
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                console.error('Form submission error:', error);
+                formStatus.classList.remove('hidden');
+                formError.classList.remove('hidden');
+                formSuccess.classList.add('hidden');
+            } finally {
+                button.disabled = false;
+                button.innerHTML = originalText;
+            }
         });
 
-        // --- Three.js Interactive 3D Background ---
+        // --- Intersection Observer for animations ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.slide-up');
+            animatedElements.forEach(el => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+
+        // --- Performance monitoring ---
+        if ('performance' in window) {
+            window.addEventListener('load', () => {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                if (perfData.loadEventEnd - perfData.loadEventStart > 3000) {
+                    console.warn('Page load time is slower than expected');
+                }
+            });
+        }
+
+        // --- Three.js Interactive 3D Background with Performance Optimizations ---
         window.addEventListener('load', () => {
             let scene, camera, renderer, particles;
             let particlesCount; 
@@ -522,20 +935,39 @@
             const clock = new THREE.Clock();
             const baseColor = new THREE.Color(0x6366f1);
             const hoverColor = new THREE.Color(0x00A99D);
+            let isVisible = true;
+            let animationId;
 
-            function init() {
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-                renderer = new THREE.WebGLRenderer({
-                    canvas: document.getElementById('hero-canvas'),
-                    alpha: true 
-                });
-                renderer.setSize(window.innerWidth, window.innerHeight);
-                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            // Performance monitoring
+            const performanceMonitor = {
+                fps: 0,
+                frameCount: 0,
+                lastTime: performance.now(),
+                
+                update() {
+                    this.frameCount++;
+                    const currentTime = performance.now();
+                    if (currentTime >= this.lastTime + 1000) {
+                        this.fps = Math.round((this.frameCount * 1000) / (currentTime - this.lastTime));
+                        this.frameCount = 0;
+                        this.lastTime = currentTime;
+                        
+                        // Adjust quality based on performance
+                        if (this.fps < 30 && particlesCount > 3000) {
+                            console.log('Reducing particle count for better performance');
+                            updateParticleCount(Math.max(3000, particlesCount * 0.8));
+                        }
+                    }
+                }
+            };
 
-                // ** Interactive Particle System **
-                const particlesGeometry = new THREE.BufferGeometry;
-                particlesCount = 7000;
+            function updateParticleCount(newCount) {
+                if (!particles) return;
+                
+                scene.remove(particles);
+                particlesCount = newCount;
+                
+                const particlesGeometry = new THREE.BufferGeometry();
                 const posArray = new Float32Array(particlesCount * 3);
                 const colorArray = new Float32Array(particlesCount * 3);
                 const originalPosArray = new Float32Array(particlesCount * 3);
@@ -561,16 +993,56 @@
                     opacity: 0.8,
                     depthWrite: false
                 });
+                
                 particles = new THREE.Points(particlesGeometry, particlesMaterial);
                 scene.add(particles);
+            }
 
+            function init() {
+                scene = new THREE.Scene();
+                camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                renderer = new THREE.WebGLRenderer({
+                    canvas: document.getElementById('hero-canvas'),
+                    alpha: true,
+                    antialias: window.devicePixelRatio === 1 // Only use antialiasing on lower DPI screens
+                });
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+                // Detect device capabilities and adjust particle count
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+                const isLowPowerMode = navigator.hardwareConcurrency <= 4;
+                
+                if (isMobile) {
+                    particlesCount = 3000;
+                } else if (isLowPowerMode) {
+                    particlesCount = 5000;
+                } else {
+                    particlesCount = 7000;
+                }
+
+                updateParticleCount(particlesCount);
                 camera.position.z = 5;
 
-                window.addEventListener('mousemove', onMouseMove);
+                // Event listeners
+                window.addEventListener('mousemove', onMouseMove, { passive: true });
                 window.addEventListener('resize', onWindowResize);
+                
+                // Intersection Observer to pause animation when not visible
+                const canvasObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        isVisible = entry.isIntersecting;
+                        if (isVisible && !animationId) {
+                            animate();
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                canvasObserver.observe(document.getElementById('hero-canvas'));
             }
 
             function onMouseMove(event) {
+                if (!isVisible) return;
                 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
             }
@@ -583,61 +1055,96 @@
             }
 
             function animate() {
+                if (!isVisible) {
+                    animationId = null;
+                    return;
+                }
+                
+                animationId = requestAnimationFrame(animate);
+                performanceMonitor.update();
+                
                 const elapsedTime = clock.getElapsedTime();
                 
-                particles.rotation.y = -elapsedTime * 0.03;
-                particles.rotation.x = -elapsedTime * 0.03;
+                if (particles) {
+                    particles.rotation.y = -elapsedTime * 0.03;
+                    particles.rotation.x = -elapsedTime * 0.03;
 
-                const mouseWorldPosition = new THREE.Vector3(mouse.x, mouse.y, 0.5);
-                mouseWorldPosition.unproject(camera);
-                const direction = mouseWorldPosition.sub(camera.position).normalize();
-                const distance = -camera.position.z / direction.z;
-                const pos = camera.position.clone().add(direction.multiplyScalar(distance));
-                
-                const particleColors = particles.geometry.attributes.color.array;
-                const particlePositions = particles.geometry.attributes.position.array;
-                const originalPositions = particles.geometry.attributes.originalPosition.array;
-
-                const mousePos2D = new THREE.Vector2(pos.x, pos.y);
-
-                for (let i = 0; i < particlesCount; i++) {
-                    const i3 = i * 3;
+                    const mouseWorldPosition = new THREE.Vector3(mouse.x, mouse.y, 0.5);
+                    mouseWorldPosition.unproject(camera);
+                    const direction = mouseWorldPosition.sub(camera.position).normalize();
+                    const distance = -camera.position.z / direction.z;
+                    const pos = camera.position.clone().add(direction.multiplyScalar(distance));
                     
-                    const particlePosition = new THREE.Vector3(particlePositions[i3], particlePositions[i3+1], particlePositions[i3+2]);
-                    const originalPosition = new THREE.Vector3(originalPositions[i3], originalPositions[i3+1], originalPositions[i3+2]);
-                    const particlePos2D = new THREE.Vector2(particlePosition.x, particlePosition.y);
+                    const particleColors = particles.geometry.attributes.color.array;
+                    const particlePositions = particles.geometry.attributes.position.array;
+                    const originalPositions = particles.geometry.attributes.originalPosition.array;
 
-                    const dist = particlePos2D.distanceTo(mousePos2D);
-                    const hoverRadius = 2.5;
-                    
-                    const color = new THREE.Color();
-                    if (dist < hoverRadius) {
-                        const alpha = 1.0 - (dist / hoverRadius);
-                        color.lerpColors(baseColor, hoverColor, alpha * alpha);
-                        
-                        // Repel effect
-                        const repelVec = new THREE.Vector3().subVectors(particlePosition, pos).normalize();
-                        const targetPosition = originalPosition.clone().add(repelVec.multiplyScalar(alpha * 1.5));
-                        particlePosition.lerp(targetPosition, 0.1);
+                    const mousePos2D = new THREE.Vector2(pos.x, pos.y);
 
-                    } else {
-                        color.set(baseColor);
-                        // Return to original position
-                        particlePosition.lerp(originalPosition, 0.05);
+                    // Optimize by only updating every few frames for better performance
+                    if (performanceMonitor.frameCount % 2 === 0) {
+                        for (let i = 0; i < particlesCount; i++) {
+                            const i3 = i * 3;
+                            
+                            const particlePosition = new THREE.Vector3(particlePositions[i3], particlePositions[i3+1], particlePositions[i3+2]);
+                            const originalPosition = new THREE.Vector3(originalPositions[i3], originalPositions[i3+1], originalPositions[i3+2]);
+                            const particlePos2D = new THREE.Vector2(particlePosition.x, particlePosition.y);
+
+                            const dist = particlePos2D.distanceTo(mousePos2D);
+                            const hoverRadius = 2.5;
+                            
+                            const color = new THREE.Color();
+                            if (dist < hoverRadius) {
+                                const alpha = 1.0 - (dist / hoverRadius);
+                                color.lerpColors(baseColor, hoverColor, alpha * alpha);
+                                
+                                // Repel effect
+                                const repelVec = new THREE.Vector3().subVectors(particlePosition, pos).normalize();
+                                const targetPosition = originalPosition.clone().add(repelVec.multiplyScalar(alpha * 1.5));
+                                particlePosition.lerp(targetPosition, 0.1);
+
+                            } else {
+                                color.set(baseColor);
+                                // Return to original position
+                                particlePosition.lerp(originalPosition, 0.05);
+                            }
+                            
+                            color.toArray(particleColors, i3);
+                            particlePosition.toArray(particlePositions, i3);
+                        }
+                        particles.geometry.attributes.color.needsUpdate = true;
+                        particles.geometry.attributes.position.needsUpdate = true;
                     }
-                    
-                    color.toArray(particleColors, i3);
-                    particlePosition.toArray(particlePositions, i3);
                 }
-                particles.geometry.attributes.color.needsUpdate = true;
-                particles.geometry.attributes.position.needsUpdate = true;
 
                 renderer.render(scene, camera);
-                requestAnimationFrame(animate);
             }
 
             init();
             animate();
+
+            // Cleanup function for better memory management
+            window.addEventListener('beforeunload', () => {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+                if (renderer) {
+                    renderer.dispose();
+                }
+                if (particles) {
+                    particles.geometry.dispose();
+                    particles.material.dispose();
+                }
+            });
+        });
+
+        // --- Hide loading screen and show body content ---
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.pointerEvents = 'none';
+
+            document.body.style.overflow = 'auto';
         });
     </script>
 </body>
