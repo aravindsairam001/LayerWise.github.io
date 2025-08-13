@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - LayerWise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Sora', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdfc',
+                            500: '#00A99D',
+                            600: '#007A70',
+                            700: '#005C54',
+                        },
+                        dark: '#0a0f1c',
+                        accent: '#6366f1'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background: #0a0f1c;
+        }
+        .glass-dark {
+            background: rgba(10, 15, 28, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #00E5D0, #8B5FFF, #FF6B9D, #FFD93D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease infinite;
+            filter: brightness(1.2) saturate(1.3);
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .hover-lift {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-dark">
+        <div class="container mx-auto px-6 h-20 flex items-center">
+            <div class="flex items-center justify-between w-full">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <img src="layerwise_logo.png" alt="LayerWise Logo" class="h-14">
+                    <span class="text-2xl font-bold gradient-text font-display">LayerWise</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="portfolio.html" class="text-white font-semibold">Portfolio</a>
+                    <a href="contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="index.html#quote" class="bg-gradient-to-r from-primary-500 to-accent text-white px-6 py-2 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                        Get Quote
+                    </a>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary-500 rounded p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 glass-dark transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
+            <a href="index.html" class="text-white hover:text-primary-500 transition-colors">Home</a>
+            <a href="about.html" class="text-white hover:text-primary-500 transition-colors">About</a>
+            <a href="portfolio.html" class="text-primary-500 font-semibold">Portfolio</a>
+            <a href="contact.html" class="text-white hover:text-primary-500 transition-colors">Contact</a>
+            <a href="index.html#quote" class="bg-gradient-to-r from-primary-500 to-accent text-white px-8 py-3 rounded-full font-semibold">
+                Get Quote
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pt-32 pb-20">
+        <div class="container mx-auto px-6">
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 font-display">
+                    Our <span class="gradient-text">Portfolio</span>
+                </h1>
+                <p class="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                    Explore our diverse collection of precision-crafted projects spanning industries from aerospace to consumer products.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn active bg-gradient-to-r from-primary-500 to-accent text-white px-6 py-3 rounded-full font-semibold" data-filter="all">
+                    All Projects
+                </button>
+                <button class="filter-btn glass-dark text-gray-300 hover:text-white px-6 py-3 rounded-full font-semibold transition-colors" data-filter="prototypes">
+                    Prototypes
+                </button>
+                <button class="filter-btn glass-dark text-gray-300 hover:text-white px-6 py-3 rounded-full font-semibold transition-colors" data-filter="miniatures">
+                    Miniatures
+                </button>
+                <button class="filter-btn glass-dark text-gray-300 hover:text-white px-6 py-3 rounded-full font-semibold transition-colors" data-filter="functional">
+                    Functional Parts
+                </button>
+                <button class="filter-btn glass-dark text-gray-300 hover:text-white px-6 py-3 rounded-full font-semibold transition-colors" data-filter="artistic">
+                    Artistic
+                </button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="portfolio-item glass-dark rounded-3xl overflow-hidden hover-lift" data-category="prototypes functional">
+                    <div class="h-64 bg-gradient-to-br from-primary-500/20 to-accent/20 flex items-center justify-center">
+                        <div class="text-8xl">🔧</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-display">Precision Gear Assembly</h3>
+                        <p class="text-gray-400 mb-4">Industrial-grade mechanical components with 0.1mm tolerance</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-primary-500/20 text-primary-500 px-3 py-1 rounded-full text-sm">FDM</span>
+                            <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-sm">Nylon</span>
+                        </div>
+                        <button class="text-primary-500 font-semibold hover:text-primary-400 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-item glass-dark rounded-3xl overflow-hidden hover-lift" data-category="miniatures artistic">
+                    <div class="h-64 bg-gradient-to-br from-accent/20 to-pink-500/20 flex items-center justify-center">
+                        <div class="text-8xl">🐲</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-display">Fantasy Dragon Miniature</h3>
+                        <p class="text-gray-400 mb-4">Ultra-detailed fantasy figure with intricate scales and wings</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full text-sm">Resin</span>
+                            <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">0.01mm</span>
+                        </div>
+                        <button class="text-accent font-semibold hover:text-indigo-400 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-item glass-dark rounded-3xl overflow-hidden hover-lift" data-category="prototypes">
+                    <div class="h-64 bg-gradient-to-br from-pink-500/20 to-orange-500/20 flex items-center justify-center">
+                        <div class="text-8xl">📱</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-display">Smartphone Case Prototype</h3>
+                        <p class="text-gray-400 mb-4">Ergonomic design with integrated wireless charging coils</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm">TPU</span>
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Flexible</span>
+                        </div>
+                        <button class="text-pink-400 font-semibold hover:text-pink-300 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-item glass-dark rounded-3xl overflow-hidden hover-lift" data-category="functional">
+                    <div class="h-64 bg-gradient-to-br from-green-500/20 to-blue-500/20 flex items-center justify-center">
+                        <div class="text-8xl">⚙️</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-display">Drone Motor Mount</h3>
+                        <p class="text-gray-400 mb-4">Lightweight yet durable mounting system for racing drones</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-blue-500/20 text-blue-400 px-3 py-1 rounded-full text-sm">Carbon Fiber</span>
+                            <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">Aerospace</span>
+                        </div>
+                        <button class="text-blue-400 font-semibold hover:text-blue-300 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-item glass-dark rounded-3xl overflow-hidden hover-lift" data-category="artistic">
+                    <div class="h-64 bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center">
+                        <div class="text-8xl">🏛️</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-display">Architectural Model</h3>
+                        <p class="text-gray-400 mb-4">Scale replica of modern office building with interior details</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">PLA+</span>
+                            <span class="bg-pink-500/20 text-pink-400 px-3 py-1 rounded-full text-sm">1:100</span>
+                        </div>
+                        <button class="text-purple-400 font-semibold hover:text-purple-300 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-item glass-dark rounded-3xl overflow-hidden hover-lift" data-category="miniatures">
+                    <div class="h-64 bg-gradient-to-br from-yellow-500/20 to-red-500/20 flex items-center justify-center">
+                        <div class="text-8xl">🗿</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 font-display">Historical Bust</h3>
+                        <p class="text-gray-400 mb-4">Museum-quality replica with incredible surface detail</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-yellow-500/20 text-yellow-400 px-3 py-1 rounded-full text-sm">Resin</span>
+                            <span class="bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm">Museum</span>
+                        </div>
+                        <button class="text-yellow-400 font-semibold hover:text-yellow-300 transition-colors">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="text-center mt-16">
+                <h2 class="text-3xl font-bold mb-6 font-display">Ready to Create Your Project?</h2>
+                <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+                    Join hundreds of satisfied clients who have brought their ideas to life with LayerWise precision.
+                </p>
+                <a href="index.html#quote" class="bg-gradient-to-r from-primary-500 to-accent text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-opacity">
+                    🚀 Start Your Project
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('translate-x-full');
+        });
+
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                mobileMenu.classList.add('translate-x-full');
+            }
+        });
+
+        // Portfolio filtering functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-gradient-to-r', 'from-primary-500', 'to-accent', 'text-white');
+                    b.classList.add('glass-dark', 'text-gray-300');
+                });
+
+                // Add active class to clicked button
+                btn.classList.add('active', 'bg-gradient-to-r', 'from-primary-500', 'to-accent', 'text-white');
+                btn.classList.remove('glass-dark', 'text-gray-300');
+
+                const filter = btn.dataset.filter;
+
+                // Filter portfolio items
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.dataset.category.includes(filter)) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 100);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
