@@ -154,30 +154,151 @@
             background: linear-gradient(45deg, #00A99D, #6366f1);
             border-radius: 4px;
         }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0f1c;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+
+        #loading-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 169, 157, 0.2);
+            border-top: 3px solid #00A99D;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #00A99D, #6366f1);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 169, 157, 0.4);
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(45deg, #00A99D, #6366f1);
+            z-index: 9998;
+            transition: width 0.3s ease;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            z-index: 20;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Improved form validation styles */
+        .form-error {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
     </style>
 </head>
 <body class="text-white font-sans">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <img src="layerwise_logo.png" alt="LayerWise Logo" class="h-16 mb-4 animate-pulse">
+        <div class="loader"></div>
+        <p class="text-white mt-4 text-lg font-medium">Preparing your 3D experience...</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass-dark">
+    <nav class="fixed top-0 w-full z-50 glass-dark" role="navigation" aria-label="Main navigation">
         <div class="container mx-auto px-6 h-20 flex items-center">
             <div class="flex items-center justify-between w-full">
                 <!-- ** LOGO CONTAINER **: Logo and company name together -->
-                <a href="#" class="flex items-center space-x-3">
+                <a href="#" class="flex items-center space-x-3" aria-label="LayerWise Home">
                     <img src="layerwise_logo.png" alt="LayerWise Logo" class="h-14"> <!-- Adjusted height -->
                     <span class="text-2xl font-bold gradient-text font-display">LayerWise</span>
                 </a>
                 
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
-                    <a href="#products" class="text-gray-300 hover:text-white transition-colors">Products</a>
-                    <a href="#process" class="text-gray-300 hover:text-white transition-colors">Process</a>
-                    <button onclick="scrollToQuote()" class="btn-primary text-white px-6 py-2 rounded-full font-semibold">
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Services</a>
+                    <a href="#products" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Products</a>
+                    <a href="#process" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1">Process</a>
+                    <button onclick="scrollToQuote()" class="btn-primary text-white px-6 py-2 rounded-full font-semibold focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark">
                         Get Started
                     </button>
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden text-white">
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-primary-500 rounded p-2" aria-label="Toggle mobile menu" aria-expanded="false">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -187,12 +308,12 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-40 glass-dark transform translate-x-full transition-transform duration-300 md:hidden">
+    <div id="mobile-menu" class="fixed inset-0 z-40 glass-dark transform translate-x-full transition-transform duration-300 md:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
         <div class="flex flex-col items-center justify-center h-full space-y-8 text-2xl">
-            <a href="#services" class="text-white hover:text-primary-500 transition-colors">Services</a>
-            <a href="#products" class="text-white hover:text-primary-500 transition-colors">Products</a>
-            <a href="#process" class="text-white hover:text-primary-500 transition-colors">Process</a>
-            <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-3 rounded-full font-semibold">
+            <a href="#services" class="text-white hover:text-primary-500 transition-colors focus:text-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-4 py-2">Services</a>
+            <a href="#products" class="text-white hover:text-primary-500 transition-colors focus:text-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-4 py-2">Products</a>
+            <a href="#process" class="text-white hover:text-primary-500 transition-colors focus:text-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-4 py-2">Process</a>
+            <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-3 rounded-full font-semibold focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark">
                 Get Started
             </button>
         </div>
@@ -211,12 +332,19 @@
                     Professional FDM & Resin printing that pushes boundaries.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center items-center slide-up delay-400">
-                    <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg">
+                    <button onclick="scrollToQuote()" class="btn-primary text-white px-8 py-4 rounded-full font-bold text-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark transform hover:scale-105 transition-all duration-300">
                         🚀 Start Your Project
                     </button>
-                    <button onclick="scrollToServices()" class="glass text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all">
+                    <button onclick="scrollToServices()" class="glass text-white px-8 py-4 rounded-full font-semibold hover:bg-white/20 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-dark transform hover:scale-105 duration-300">
                         Explore Services
                     </button>
+                </div>
+                
+                <!-- Scroll Indicator -->
+                <div class="scroll-indicator" onclick="scrollToServices()" role="button" tabindex="0" aria-label="Scroll to services section">
+                    <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -432,37 +560,43 @@
 
             <div class="max-w-2xl mx-auto glass-dark rounded-3xl p-8 slide-up delay-300">
                 <form id="quote-form" action="https://formspree.io/f/mwpqbvow" method="POST" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
-                            <input type="text" name="name" required 
-                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
-                                   placeholder="John Doe">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
-                            <input type="email" name="email" required 
-                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
-                                   placeholder="john@example.com">
-                        </div>
+                    <div class="grid md:grid-cols-2 gap-6">                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Your Name</label>
+                        <input type="text" name="name" required 
+                               class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
+                               placeholder="John Doe"
+                               autocomplete="name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
+                        <input type="email" name="email" required 
+                               class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
+                               placeholder="john@example.com"
+                               autocomplete="email">
+                    </div>
                     </div>
 
                     <div>
                         <label for="drive-link" class="block text-sm font-semibold text-gray-300 mb-2">Public Drive Link (.zip)</label>
                         <input type="url" id="drive-link" name="drive-link" required 
                                class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all"
-                               placeholder="https://drive.google.com/...">
+                               placeholder="https://drive.google.com/..."
+                               autocomplete="url">
                         <p class="text-xs text-gray-500 mt-2">Please ensure sharing is set to "Anyone with the link can view".</p>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">Project Requirements</label>
-                        <textarea name="message" rows="4" 
+                        <label for="project-message" class="block text-sm font-semibold text-gray-300 mb-2">Project Requirements</label>
+                        <textarea id="project-message" name="message" rows="4" 
                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-all resize-none"
-                                  placeholder="Tell us about your project - material preferences, quantity, timeline, special requirements..."></textarea>
+                                  placeholder="Tell us about your project - material preferences, quantity, timeline, special requirements..."
+                                  maxlength="500"></textarea>
+                        <div class="text-xs text-gray-500 mt-1 text-right">
+                            <span id="char-count">0</span>/500 characters
+                        </div>
                     </div>
 
-                    <button type="submit" class="w-full btn-primary text-white font-bold py-4 px-8 rounded-xl text-lg">
+                    <button type="submit" class="w-full btn-primary text-white font-bold py-4 px-8 rounded-xl text-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-dark transform hover:scale-105 transition-all duration-300">
                         🚀 Get Instant Quote
                     </button>
                 </form>
@@ -482,19 +616,98 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Back to top">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
     <script>
-        // --- Mobile menu toggle ---
+        // --- Loading Screen ---
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // --- Progress Bar ---
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            document.getElementById('progress-bar').style.width = scrollPercent + '%';
+        });
+
+        // --- Back to Top Button ---
+        const backToTop = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // --- Mobile menu toggle with keyboard support ---
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileMenuBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMobileMenu();
+            }
+        });
+
+        function toggleMobileMenu() {
+            const isOpen = !mobileMenu.classList.contains('translate-x-full');
             mobileMenu.classList.toggle('translate-x-full');
+            mobileMenuBtn.setAttribute('aria-expanded', !isOpen);
+            
+            // Prevent body scroll when menu is open
+            if (!isOpen) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close mobile menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('translate-x-full')) {
+                toggleMobileMenu();
+            }
         });
 
         mobileMenu.addEventListener('click', (e) => {
             if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
-                mobileMenu.classList.add('translate-x-full');
+                toggleMobileMenu();
             }
+        });
+
+        // Add keyboard support for scroll indicator
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            scrollIndicator.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    scrollToServices();
+                }
+            });
         });
 
         // --- Smooth scrolling functions ---
@@ -506,12 +719,146 @@
             document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
         }
         
-        // --- Form submission ---
+        // --- Enhanced Form Experience with Validation ---
         const quoteForm = document.getElementById('quote-form');
+        const inputs = quoteForm.querySelectorAll('input, textarea');
+
+        // Add validation messages
+        inputs.forEach(input => {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            input.parentNode.appendChild(errorDiv);
+
+            input.addEventListener('blur', validateField);
+            input.addEventListener('input', clearError);
+        });
+
+        function validateField(e) {
+            const field = e.target;
+            const errorDiv = field.parentNode.querySelector('.error-message');
+            
+            if (field.type === 'email' && field.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(field.value)) {
+                    showError(field, errorDiv, 'Please enter a valid email address');
+                    return false;
+                }
+            }
+            
+            if (field.type === 'url' && field.value) {
+                const urlRegex = /^https?:\/\/.+/;
+                if (!urlRegex.test(field.value)) {
+                    showError(field, errorDiv, 'Please enter a valid URL starting with http:// or https://');
+                    return false;
+                }
+            }
+            
+            if (field.required && !field.value.trim()) {
+                showError(field, errorDiv, 'This field is required');
+                return false;
+            }
+            
+            clearError(e);
+            return true;
+        }
+
+        function showError(field, errorDiv, message) {
+            field.classList.add('form-error');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        function clearError(e) {
+            const field = e.target;
+            const errorDiv = field.parentNode.querySelector('.error-message');
+            field.classList.remove('form-error');
+            errorDiv.classList.remove('show');
+        }
+
+        // --- Form submission with validation ---
         quoteForm.addEventListener('submit', (e) => {
-            const button = quoteForm.querySelector('button[type="submit"]');
-            button.disabled = true;
-            button.innerHTML = 'Submitting...';
+            e.preventDefault();
+            
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateField({ target: input })) {
+                    isValid = false;
+                }
+            });
+            
+            if (isValid) {
+                const button = quoteForm.querySelector('button[type="submit"]');
+                const originalText = button.innerHTML;
+                button.disabled = true;
+                button.innerHTML = 'Submitting...';
+                
+                // Submit form
+                fetch(quoteForm.action, {
+                    method: 'POST',
+                    body: new FormData(quoteForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }).then(response => {
+                    if (response.ok) {
+                        button.innerHTML = '✅ Sent Successfully!';
+                        quoteForm.reset();
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.disabled = false;
+                        }, 3000);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                }).catch(error => {
+                    button.innerHTML = '❌ Error - Try Again';
+                    button.disabled = false;
+                    setTimeout(() => {
+                        button.innerHTML = originalText;
+                    }, 3000);
+                });
+            }
+        });
+
+        // --- Intersection Observer for animations ---
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '-50px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all slide-up elements and add character counter
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.slide-up').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Character counter for textarea
+            const textarea = document.getElementById('project-message');
+            const charCount = document.getElementById('char-count');
+            
+            if (textarea && charCount) {
+                textarea.addEventListener('input', () => {
+                    const count = textarea.value.length;
+                    charCount.textContent = count;
+                    
+                    if (count > 450) {
+                        charCount.parentElement.classList.add('text-yellow-400');
+                        charCount.parentElement.classList.remove('text-gray-500');
+                    } else {
+                        charCount.parentElement.classList.remove('text-yellow-400');
+                        charCount.parentElement.classList.add('text-gray-500');
+                    }
+                });
+            }
         });
 
         // --- Three.js Interactive 3D Background ---
